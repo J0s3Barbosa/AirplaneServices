@@ -1,6 +1,6 @@
 using System;
 
-namespace AirplaneServices.WebAPI
+namespace AirplaneServices.Domain.Entities
 {
     public class WeatherForecast
     {

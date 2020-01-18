@@ -1,39 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AirplaneServices.Application.Extensions;
+using AirplaneServices.Application.Logic;
+using AirplaneServices.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 
 namespace AirplaneServices.WebAPI.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
+    [ApiVersion("1")]
+    [ApiVersion("2")]
+    [SwaggerGroup("Weather Forecast Api")]
+    [ApiController, Route("api/v{version:apiVersion}/[controller]"), Produces("application/json")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly WeatherForecastMicroservice weatherForecastMicroservice;
+        private readonly IConfiguration _configuration;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IConfiguration configuration)
         {
             _logger = logger;
+            _configuration = configuration;
+            var userManagementServiceUrl = _configuration["Microservices:LearningHubManagement"];
+            weatherForecastMicroservice = string.IsNullOrEmpty(userManagementServiceUrl) ? new WeatherForecastMicroservice() : new WeatherForecastMicroservice(userManagementServiceUrl);
         }
-
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+            var questions = weatherForecastMicroservice.GetWeatherForecast();
+
+            //var result = new List<WeatherForecast>();
+            //foreach (var item in questions)
+            //{
+            //    result.Add((WeatherForecast)new WeatherForecast().InjectFrom(item));
+            //}
+            return questions;
         }
     }
 }

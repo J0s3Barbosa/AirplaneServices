@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirplaneServices.Applicatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirplaneServices.Domain", "AirplaneServices.Domain\AirplaneServices.Domain.csproj", "{1F9DF132-CA62-481D-8B4B-0A3C8265AED2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirplaneServices.WebAPI.Tests.Unit", "AirplaneServices.WebAPI.Tests.Unit\AirplaneServices.WebAPI.Tests.Unit.csproj", "{B830819A-73FB-4026-9368-0008BB716C9E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +44,10 @@ Global
 		{1F9DF132-CA62-481D-8B4B-0A3C8265AED2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F9DF132-CA62-481D-8B4B-0A3C8265AED2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F9DF132-CA62-481D-8B4B-0A3C8265AED2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B830819A-73FB-4026-9368-0008BB716C9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B830819A-73FB-4026-9368-0008BB716C9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B830819A-73FB-4026-9368-0008BB716C9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B830819A-73FB-4026-9368-0008BB716C9E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +59,7 @@ Global
 		{AD7637D4-36CE-4E8B-99F5-72D3078EFEBC} = {99B67E63-65A4-4AC2-834F-071C1A4EF381}
 		{D9EAEDBB-F67D-4F43-9741-2043F11CE2BC} = {99B67E63-65A4-4AC2-834F-071C1A4EF381}
 		{1F9DF132-CA62-481D-8B4B-0A3C8265AED2} = {99B67E63-65A4-4AC2-834F-071C1A4EF381}
+		{B830819A-73FB-4026-9368-0008BB716C9E} = {99B67E63-65A4-4AC2-834F-071C1A4EF381}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7892239F-77E0-4D49-9832-920A72B1354B}

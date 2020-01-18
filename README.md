@@ -40,8 +40,10 @@
         AirplaneServices.Application
         AirplaneServices.Domain
         AirplaneServices.Infra
+        AirplaneServices.IoC
         AirplaneServices.WebAPI
-
+        AirplaneServices.WebAPI.Tests.Unit
+        
     - FrontEnd
 
         AirplaneServices.Web
