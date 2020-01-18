@@ -28,14 +28,20 @@
     Para executar o projeto em angular 7, entre no diretório e digite [ng serve --open] no console;
 
 # AirplaneServices Tecnologias utilizadas:
- ⦁ FRONT-END – Angular 7
- ⦁ BACK-END - .Net Core 3.1 / Entity Framework Core / RESTful Api
- ⦁ PATTERNS – DDD e Injeção de Dependência
 
+    ⦁ FRONT-END – Angular 7
+    ⦁ BACK-END - .Net Core 3.1 / Entity Framework Core / RESTful Api
+    ⦁ PATTERNS – DDD e Injeção de Dependência
 
+# AirplaneServices Layers:
 
+    - BackEnd
 
+        AirplaneServices.Application
+        AirplaneServices.Domain
+        AirplaneServices.Infra
+        AirplaneServices.WebAPI
 
+    - FrontEnd
 
-
-
+        AirplaneServices.Web
