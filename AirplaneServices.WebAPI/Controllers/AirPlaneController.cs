@@ -24,7 +24,6 @@ namespace AirplaneServices.WebAPI.Controllers
             this._IAppAirPlaneLogic = iAppAirPlaneLogic;
         }
 
-        //https://localhost:5001/v1/AirPlanes??code=5
         /// <summary>
         /// Get AirPlane
         /// </summary>

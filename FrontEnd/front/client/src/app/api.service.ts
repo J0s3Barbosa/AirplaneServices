@@ -9,8 +9,8 @@ const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 const host = 'https://localhost:44344';
-const endPointAirPlane = '/v1/AirPlane';
-const endPointAirPlaneModel = '/v1/AirPlaneModel';
+const endPointAirPlane = '/api/v1/airplane';
+const endPointAirPlaneModel = '/api/v1/AirPlaneModel';
 const apiUrlAirPlane = `${host}${endPointAirPlane}`;
 
 @Injectable({
@@ -23,7 +23,7 @@ export class ApiService {
   getAirplanes (): Observable<AirPlaneModel[]> {
     return this.http.get<AirPlaneModel[]>(apiUrlAirPlane)
       .pipe(
-        tap(heroes => console.log('fetched Airplanes')),
+        tap(airPlane => console.log('fetched Airplanes')),
         catchError(this.handleError('getAirplanes', []))
       );
   }

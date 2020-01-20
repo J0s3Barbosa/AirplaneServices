@@ -19,6 +19,7 @@ namespace AirplaneServices.WebAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddExtentions(Configuration);
             services.AddControllers();
         }
@@ -27,13 +28,21 @@ namespace AirplaneServices.WebAPI
             IWebHostEnvironment env,
             IApiVersionDescriptionProvider versionProvider)
         {
-            app.AddExtensions(versionProvider);
 
+
+
+
+            app.AddExtensions(versionProvider);
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+            //else
+            //{
+            //    app.UseExceptionHandler("/Error");
+            //    app.UseHsts();
+            //}
 
             app.UseHttpsRedirection();
 

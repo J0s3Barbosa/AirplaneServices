@@ -5,28 +5,28 @@ import { AirPlaneModel } from '../Shared/AirPlaneModel';
 @Component({
   selector: 'app-airplane',
   templateUrl: './airplane.component.html',
-  styleUrls: ['./airplane.component.sass']
+  styleUrls: ['./airplane.component.css']
 })
 export class AirplaneComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'code', 'model', 'numberOfPassengers', 'creationDate'];
-data: AirPlaneModel[] = [];
-isLoadingResults = true;
+  data: AirPlaneModel[] = [];
+  isLoadingResults = true;
 
 
   constructor(private api: ApiService) { }
-
+ 
   ngOnInit() {
     this.api.getAirplanes()
-    .subscribe(res => {
-      this.data = res;
-      console.log(this.data);
-      this.isLoadingResults = false;
-    }, err => {
-      console.log(err);
-      this.isLoadingResults = false;
-    });
+      .subscribe(res => {
+        this.data = res;
+        console.log(this.data);
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
   }
-  
+
 
 }
