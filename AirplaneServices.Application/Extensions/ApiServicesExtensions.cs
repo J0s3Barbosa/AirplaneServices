@@ -22,6 +22,7 @@ namespace AirplaneServices.Application.Extensions
         {
             app.SetSwagger(versionProvider);
         }
+
     }
 
 }

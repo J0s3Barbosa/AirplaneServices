@@ -1,3 +1,5 @@
+using AirplaneServices.Infra.Context;
+using AirplaneServices.WebAPI.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
@@ -7,10 +9,8 @@ namespace AirplaneServices.WebAPI
     {
         public static void Main(string[] args)
         {
-
-            CreateHostBuilder(args).Build().Run();
-            // CreateHostBuilder(args).Build().MigrateDbContext<ContextBase>(context => { }).Run();
-
+            //CreateHostBuilder(args).Build().Run();
+            CreateHostBuilder(args).Build().MigrateDbContext<ContextBase>(context => { }).Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

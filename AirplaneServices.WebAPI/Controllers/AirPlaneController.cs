@@ -17,7 +17,6 @@ namespace AirplaneServices.WebAPI.Controllers
     [ApiController, Route("api/v{version:apiVersion}/[controller]"), Produces("application/json")]
     public class AirPlaneController : ControllerBase
     {
-
         private readonly IAirPlaneLogic _IAppAirPlaneLogic;
 
         public AirPlaneController(IAirPlaneLogic iAppAirPlaneLogic)
@@ -28,7 +27,7 @@ namespace AirplaneServices.WebAPI.Controllers
         //https://localhost:5001/v1/AirPlanes??code=5
         /// <summary>
         /// Get AirPlane
-        /// </summary> 
+        /// </summary>
         /// <response code="200">Ok</response>
         /// <response code="500">Internal Server Error</response>
         [HttpGet]
@@ -47,7 +46,7 @@ namespace AirplaneServices.WebAPI.Controllers
 
         /// <summary>
         /// Get AirPlane
-        /// </summary> 
+        /// </summary>
         /// <response code="200">Ok</response>
         /// <response code="400">Bad Request</response>
         /// <response code="404">Not Found</response>
@@ -72,7 +71,7 @@ namespace AirplaneServices.WebAPI.Controllers
 
         /// <summary>
         /// Create AirPlane
-        /// </summary> 
+        /// </summary>
         /// <response code="201">Created</response>
         /// <response code="400">Bad Request</response>
         /// <response code="422">Unprocessable Entity</response>
@@ -103,7 +102,7 @@ namespace AirplaneServices.WebAPI.Controllers
 
         /// <summary>
         /// Update AirPlane
-        /// </summary> 
+        /// </summary>
         /// <response code="200">Ok</response>
         /// <response code="400">Bad Request</response>
         /// <response code="404">Not Found</response>
@@ -138,7 +137,7 @@ namespace AirplaneServices.WebAPI.Controllers
 
         /// <summary>
         /// Remove AirPlane
-        /// </summary> 
+        /// </summary>
         /// <response code="200">Ok</response>
         /// <response code="400">Bad Request</response>
         /// <response code="404">Not Found</response>
@@ -165,5 +164,4 @@ namespace AirplaneServices.WebAPI.Controllers
             else return await Task.FromResult<ActionResult>(this.Ok("The AirPlane was successfully removed."));
         }
     }
-
 }

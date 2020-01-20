@@ -22,5 +22,4 @@ namespace AirplaneServices.WebAPI.Models
 
         public DateTime CreationDate { get; set; }
     }
-
 }

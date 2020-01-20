@@ -25,5 +25,4 @@ namespace AirplaneServices.Domain.Entities
             return this;
         }
     }
-
 }

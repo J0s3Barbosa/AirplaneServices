@@ -4,6 +4,5 @@ namespace AirplaneServices.Domain.Interfaces
 {
     public interface IAirPlane : IGeneric<AirPlane>
     {
-
     }
 }

@@ -17,18 +17,17 @@ namespace AirplaneServices.WebAPI.Controllers
     [ApiController, Route("api/v{version:apiVersion}/[controller]"), Produces("application/json")]
     public class AirPlaneModelController : ControllerBase
     {
-
         private readonly IAirPlaneModelLogic _IAirPlaneModelLogic;
 
         public AirPlaneModelController(IAirPlaneModelLogic iAppAirPlaneModelLogic)
         {
-            this._IAirPlaneModelLogic = iAppAirPlaneModelLogic;
+            _IAirPlaneModelLogic = iAppAirPlaneModelLogic;
         }
 
         //https://localhost:5001/v1/AirPlaneModelController?code=5
         /// <summary>
         /// Get AirPlaneModel
-        /// </summary> 
+        /// </summary>
         /// <response code="200">Ok</response>
         /// <response code="500">Internal Server Error</response>
         [HttpGet]
@@ -47,7 +46,7 @@ namespace AirplaneServices.WebAPI.Controllers
 
         /// <summary>
         /// Get AirPlaneModel
-        /// </summary> 
+        /// </summary>
         /// <response code="200">Ok</response>
         /// <response code="400">Bad Request</response>
         /// <response code="404">Not Found</response>

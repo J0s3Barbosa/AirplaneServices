@@ -11,8 +11,8 @@ namespace AirplaneServices.WebAPI.Tests.Unit
 {
     public class AirPlaneControllerTests
     {
-        readonly IWindsorContainer _container;
-        readonly IAirPlaneLogic _AirPlaneLogic;
+        private readonly IWindsorContainer _container;
+        private readonly IAirPlaneLogic _AirPlaneLogic;
 
         public AirPlaneControllerTests()
         {
@@ -49,10 +49,5 @@ namespace AirplaneServices.WebAPI.Tests.Unit
             result.Should().NotBeNull();
             result.Should().HaveCountGreaterThan(0);
         }
-
-
-
-
-
     }
 }

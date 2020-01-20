@@ -5,7 +5,9 @@ namespace AirplaneServices.Domain.Entities
 {
     public class AirPlane
     {
-        public AirPlane() { }
+        public AirPlane()
+        {
+        }
 
         public Guid Id { get; set; }
 
@@ -20,5 +22,4 @@ namespace AirplaneServices.Domain.Entities
 
         public DateTime CreationDate { get; set; }
     }
-
 }

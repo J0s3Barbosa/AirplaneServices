@@ -19,11 +19,8 @@ namespace AirplaneServices.WebAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //ConfigDbConn.ConfigureServices(services);
-
-            services.AddControllers();
             services.AddExtentions(Configuration);
-
+            services.AddControllers();
         }
 
         public void Configure(IApplicationBuilder app,
@@ -49,5 +46,10 @@ namespace AirplaneServices.WebAPI
                 endpoints.MapControllers();
             });
         }
+
+
+
+
+
     }
 }

@@ -24,6 +24,11 @@
 
     executar a api
 
+###### Before Running this Project
+ 1. Install npm packages using 'npm install' command from Angular 7 folder.
+ ng serve
+
+
 # executar FRONT-END
     Para executar o projeto em angular 7, entre no diretório e digite [ng serve --open] no console;
 

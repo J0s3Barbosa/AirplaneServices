@@ -34,5 +34,4 @@ namespace AirplaneServices.WebAPI.Extensions
             return webHost;
         }
     }
-
 }

@@ -14,7 +14,6 @@ namespace AirplaneServices.WebAPI.Controllers
     [ApiController, Route("api/v{version:apiVersion}/[controller]"), Produces("application/json")]
     public class WeatherForecastController : ControllerBase
     {
-
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly WeatherForecastMicroservice weatherForecastMicroservice;
         private readonly IConfiguration _configuration;
@@ -26,6 +25,7 @@ namespace AirplaneServices.WebAPI.Controllers
             var userManagementServiceUrl = _configuration["Microservices:LearningHubManagement"];
             weatherForecastMicroservice = string.IsNullOrEmpty(userManagementServiceUrl) ? new WeatherForecastMicroservice() : new WeatherForecastMicroservice(userManagementServiceUrl);
         }
+
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {

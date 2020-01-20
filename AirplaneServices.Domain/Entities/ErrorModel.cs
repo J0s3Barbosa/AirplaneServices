@@ -49,5 +49,4 @@ namespace AirplaneServices.Domain.Entities
         /// </remarks>
         public IList<ErrorModel> ToList() => new List<ErrorModel>() { this };
     }
-
 }
