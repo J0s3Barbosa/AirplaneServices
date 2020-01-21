@@ -4,54 +4,121 @@ import { Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap, map } from 'rxjs/operators';
 import { AirPlaneModel } from './Shared/AirPlaneModel';
+import { AirPlaneModelModel } from './Shared/AirPlaneModelModel';
+import { AirPlaneAddModel } from './Shared/AirPlaneAddModel';
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 const host = 'https://localhost:44344';
 const endPointAirPlane = '/api/v1/airplane';
 const endPointAirPlaneModel = '/api/v1/AirPlaneModel';
 const apiUrlAirPlane = `${host}${endPointAirPlane}`;
+const apiUrlAirPlaneModel = `${host}${endPointAirPlaneModel}`;
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
+  formData:AirPlaneAddModel;
 
   constructor(private http: HttpClient) { }
 
-  getAirplanes (): Observable<AirPlaneModel[]> {
+  getAirplanes(): Observable<AirPlaneModel[]> {
     return this.http.get<AirPlaneModel[]>(apiUrlAirPlane)
       .pipe(
-        tap(airPlane => console.log('fetched Airplanes')),
+        tap(airPlane => console.log(`fetched Airplanes =${airPlane}`)),
         catchError(this.handleError('getAirplanes', []))
       );
   }
-  
-  getAirplane(id: number): Observable<AirPlaneModel> {
+
+  getAirplane(id: string): Observable<AirPlaneModel> {
     const url = `${apiUrlAirPlane}/${id}`;
     return this.http.get<AirPlaneModel>(url).pipe(
-      tap(_ => console.log(`fetched Airplane id=${id}`)),
+      tap(airPlane =>
+        console.log(`fetched Airplane id=${id} airPlane=${airPlane.code}`)
+      ),
       catchError(this.handleError<AirPlaneModel>(`getAirplane id=${id}`))
     );
   }
-  
-  addAirplane (airPlane: any): Observable<AirPlaneModel> {
-    return this.http.post<AirPlaneModel>(apiUrlAirPlane, airPlane, httpOptions).pipe(
-      tap((airPlaneRes: AirPlaneModel) => console.log(`added Airplane w/ id=${airPlaneRes.id}`)),
-      catchError(this.handleError<AirPlaneModel>('addAirplane'))
+
+  addAirplane(airPlaneAddModel: any): Observable<AirPlaneAddModel> {
+
+    let options = {
+      headers: new HttpHeaders()
+        .set("Content-Type", "application/json")
+        .set("Accept", "application/json")
+    };
+
+    // var obj =  {
+    //   "code": "string",
+    //   "model": {
+    //     "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+    //   },
+    //   "numberOfPassengers": 0
+    // }
+
+    var obj = {
+      code: airPlaneAddModel.code,
+      model: airPlaneAddModel.model,
+      numberOfPassengers: airPlaneAddModel.numberOfPassengers
+    };
+    return this.http.post<AirPlaneAddModel>(apiUrlAirPlane, JSON.stringify(obj), options).pipe(
+      tap((airPlaneRes: AirPlaneAddModel) => console.log(`added Airplane w/ code=${airPlaneRes.code}`)),
+      catchError(this.handleError<AirPlaneAddModel>('addAirplane'))
     );
   }
-  
-  updateAirplane (id: number, airPlane: any): Observable<any> {
+  postAirplane(formData:AirPlaneAddModel){
+    return this.http.post(apiUrlAirPlane,formData);
+  }
+
+  addPost(post: AirPlaneAddModel) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/vnd.smallprogram.post.create+json',
+        'Accept': 'application/vnd.smallprogram.hateoas+json'
+      })
+    }
+    return this.http.post<AirPlaneAddModel>(`${apiUrlAirPlane}`, post, httpOptions);
+  }
+  updateAirplane(id: string, airPlane: any): Observable<any> {
     const url = `${apiUrlAirPlane}/${id}`;
-    return this.http.put(url, airPlane, httpOptions).pipe(
-      tap(_ => console.log(`updated Airplane id=${id}`)),
-      catchError(this.handleError<any>('updateAirplane'))
-    );
+    // return this.http
+    // .put(url, airPlane, httpOptions)
+    // .pipe(
+    //   tap(_ => console.log(`updated Airplane id=${id}`)),
+    //   catchError(this.handleError<any>('updateAirplane'))
+    // );
+
+    return this.http
+      .put<any>(`${url}`, airPlane, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      })
+      .pipe(
+        catchError(this.handleError)
+      );
+
+
   }
-  
-  deleteAirplane (id: number): Observable<AirPlaneModel> {
+  putAirPlane(id: string, airPlane: any) {
+    const url = `${apiUrlAirPlane}/${id}`;
+    const obj = {
+      code: airPlane.code,
+      model: airPlane.model,
+      numberOfPassengers: airPlane.numberOfPassengers
+    };
+    return this
+      .http
+      .put(`${url}`, obj)
+      .subscribe(res => console.log(`res ${res}`)
+        , catchError(this.handleError)
+      )
+      ;
+  }
+
+  deleteAirplane(id: string): Observable<AirPlaneModel> {
     const url = `${apiUrlAirPlane}/${id}`;
     return this.http.delete<AirPlaneModel>(url, httpOptions).pipe(
       tap(_ => console.log(`deleted Airplane id=${id}`)),
@@ -59,13 +126,21 @@ export class ApiService {
     );
   }
 
-  
-  private handleError<T> (operation = 'operation', result?: T) {
+  getAirPlaneModelModels(): Observable<AirPlaneModelModel[]> {
+    return this.http.get<AirPlaneModelModel[]>(apiUrlAirPlaneModel)
+      .pipe(
+        tap(airPlaneModelModel => console.log(`fetched Airplanes =${airPlaneModelModel}`)),
+        catchError(this.handleError('getAirplanes', []))
+      );
+  }
+
+
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-  
+
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
-  
+
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };

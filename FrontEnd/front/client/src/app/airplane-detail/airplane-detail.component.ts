@@ -11,15 +11,15 @@ import { AirPlaneModel } from '../Shared/AirPlaneModel';
 export class AirplaneDetailComponent implements OnInit {
  
   airPlaneModel: AirPlaneModel = {
-    id: null,
+    id: '',
     code: '',
     model: null,
     numberOfPassengers: null,
     creationDate: null ,
   };
   isLoadingResults = true;
-
-  getAirplaneDetails(id) {
+ 
+  getAirplaneDetails(id: string) {
     this.api.getAirplane(id)
       .subscribe(data => {
         this.airPlaneModel = data;
@@ -27,7 +27,7 @@ export class AirplaneDetailComponent implements OnInit {
         this.isLoadingResults = false;
       });
   }
-  deleteAirplane(id: number) {
+  deleteAirplane(id: string) {
     this.isLoadingResults = true;
     this.api.deleteAirplane(id)
       .subscribe(res => {
@@ -43,6 +43,7 @@ export class AirplaneDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute, private api: ApiService, private router: Router) { }
 
   ngOnInit() {
+
     this.getAirplaneDetails(this.route.snapshot.params['id']);
   }
 

@@ -14,7 +14,10 @@ namespace AirplaneServices.Application.Extensions
                 {
                     builder.WithOrigins("http://localhost:4200"
                         )
-                    .AllowAnyMethod();
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowAnyOrigin()
+                    ;
                 });
 
 

@@ -1,1 +1,42 @@
-<p>airplane-add works!</p>
+<div class="example-container mat-elevation-z8">
+    <div class="example-loading-shade"
+         *ngIf="isLoadingResults">
+      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    </div>
+    <div class="button-row">
+      <a mat-flat-button color="primary" [routerLink]="['/airplane']"><mat-icon>list</mat-icon></a>
+    </div>
+    <mat-card class="example-card">
+      <form [formGroup]="airPlaneAddModelForm" (ngSubmit)="onFormSubmit(airPlaneAddModelForm.value)">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="code" formControlName="code"
+                 [errorStateMatcher]="matcher">
+          <mat-error>
+            <span *ngIf="!airPlaneAddModelForm.get('code').valid && airPlaneAddModelForm.get('code').touched">Please enter code</span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-label>model</mat-label>
+        <br>
+        <select  #select class="form-control" formControlName="model">
+          <option *ngFor="let event of dataAirPlaneModelModel; let i = index"  [ngValue]="event.id">
+              {{event.name}}
+          </option>
+      </select>
+      
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="numberOfPassengers" formControlName="numberOfPassengers"
+                   [errorStateMatcher]="matcher">
+            <mat-error>
+              <span *ngIf="!airPlaneAddModelForm.get('numberOfPassengers').valid && airPlaneAddModelForm.get('numberOfPassengers').touched">Please enter numberOfPassengers</span>
+            </mat-error>
+          </mat-form-field>
+
+    
+        <div class="button-row">
+          <button type="submit" [disabled]="!airPlaneAddModelForm.valid" mat-flat-button color="primary"><mat-icon>save</mat-icon></button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+  

@@ -3,32 +3,34 @@
          *ngIf="isLoadingResults">
       <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
     </div>
+
     <div class="button-row">
       <a mat-flat-button color="primary" [routerLink]="['/airplane']"><mat-icon>list</mat-icon></a>
     </div>
+
     <mat-card class="example-card">
       <mat-card-header>
-        <mat-card-title><h2>airplane ID: {{airplane.id}}</h2></mat-card-title>
-        <mat-card-subtitle>model Name: {{airplane.AirPlaneModelModel}}</mat-card-subtitle>
+        <mat-card-title><h2>airplane ID: {{airPlaneModel.id}}</h2></mat-card-title>
+        <mat-card-subtitle>model Name: {{airPlaneModel.code}}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
         <dl>
           <dt>id:</dt>
-          <dd>{{airplane.id}}</dd>
+          <dd>{{airPlaneModel.id}}</dd>
           <dt>code:</dt>
-          <dd>{{airplane.code}}</dd>
+          <dd>{{airPlaneModel.code}}</dd>
           <dt>model:</dt>
-          <dd>{{airplane.model}}</dd>
+          <dd>{{airPlaneModel.model}}</dd>
           <dt>numberOfPassengers:</dt>
-          <dd>{{airplane.numberOfPassengers}}</dd>
+          <dd>{{airPlaneModel.numberOfPassengers}}</dd>
           <dt>creationDate:</dt>
-          <dd>{{airplane.creationDate}}</dd>
+          <dd>{{airPlaneModel.creationDate}}</dd>
          
         </dl>
       </mat-card-content>
       <mat-card-actions>
-        <a mat-flat-button color="primary" [routerLink]="['/airplane-edit/', airplane.id || 'all']"><mat-icon>edit</mat-icon></a>
-        <a mat-flat-button color="warn" (click)="deleteAirplane(airplane.id)"><mat-icon>delete</mat-icon></a>
+        <a mat-flat-button color="primary" [routerLink]="['/airplane-edit/', airPlaneModel.id]"><mat-icon>edit</mat-icon></a>
+        <a mat-flat-button color="warn" (click)="deleteAirplane(airPlaneModel.id)"><mat-icon>delete</mat-icon></a>
       </mat-card-actions>
     </mat-card>
   </div>
