@@ -6,6 +6,7 @@ import { catchError, tap, map } from 'rxjs/operators';
 import { AirPlaneModel } from './Shared/AirPlaneModel';
 import { AirPlaneModelModel } from './Shared/AirPlaneModelModel';
 import { AirPlaneAddModel } from './Shared/AirPlaneAddModel';
+import { ApiResponse } from './Shared/ApiResponse';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -63,24 +64,17 @@ export class ApiService {
       model: airPlaneAddModel.model,
       numberOfPassengers: airPlaneAddModel.numberOfPassengers
     };
-    return this.http.post<AirPlaneAddModel>(apiUrlAirPlane, JSON.stringify(obj), options).pipe(
+    return this.http.post<AirPlaneAddModel>(apiUrlAirPlane, obj, options).pipe(
       tap((airPlaneRes: AirPlaneAddModel) => console.log(`added Airplane w/ code=${airPlaneRes.code}`)),
       catchError(this.handleError<AirPlaneAddModel>('addAirplane'))
     );
   }
-  postAirplane(formData:AirPlaneAddModel){
-    return this.http.post(apiUrlAirPlane,formData);
+
+  postAirplane(airPlaneAddModel: AirPlaneAddModel): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(apiUrlAirPlane, airPlaneAddModel);
   }
 
-  addPost(post: AirPlaneAddModel) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/vnd.smallprogram.post.create+json',
-        'Accept': 'application/vnd.smallprogram.hateoas+json'
-      })
-    }
-    return this.http.post<AirPlaneAddModel>(`${apiUrlAirPlane}`, post, httpOptions);
-  }
+
   updateAirplane(id: string, airPlane: any): Observable<any> {
     const url = `${apiUrlAirPlane}/${id}`;
     // return this.http

@@ -2,10 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
-import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators, FormArray, AbstractControl } from '@angular/forms';
 import { AirPlaneAddModel } from '../Shared/AirPlaneAddModel';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { AirPlaneModelModel } from '../Shared/AirPlaneModelModel';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-airplane-add',
@@ -14,12 +15,8 @@ import { AirPlaneModelModel } from '../Shared/AirPlaneModelModel';
 })
 export class AirplaneAddComponent implements OnInit {
   dataAirPlaneModelModel: AirPlaneModelModel[] = [];
-  orders = [];
 
-  airPlaneAddModelForm: FormGroup;
-  code = '';
-  model = '';
-  numberOfPassengers = '';
+  addForm: FormGroup;
   isLoadingResults = true;
 
   constructor(private router: Router, private api: ApiService, private formBuilder: FormBuilder,
@@ -28,12 +25,6 @@ export class AirplaneAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.airPlaneAddModelForm = this.formBuilder.group({
-      'code': [null, Validators.required],
-      'model': [null, Validators.required],
-      'numberOfPassengers': [null, Validators.required],
-
-    });
     this.api.getAirPlaneModelModels()
       .subscribe(res => {
         this.dataAirPlaneModelModel = res;
@@ -43,23 +34,54 @@ export class AirplaneAddComponent implements OnInit {
         console.log(err);
         this.isLoadingResults = false;
       })
+
+    this.addForm = this.formBuilder.group({
+      code: ['', Validators.required],
+      model: this.formBuilder.group({
+        id: '',
+      }),
+      numberOfPassengers: new FormControl('', [
+        Validators.required,
+        Validators.pattern("^[0-9]*$"),
+        Validators.minLength(1),
+      ])
+    });
+
   }
 
-  onFormSubmit(form: NgForm) {
+  onFormSubmit() {
     this.isLoadingResults = true;
 
-    console.log('form');
-    console.log(form);
+    console.log('this.addForm.value');
+    console.log(this.addForm.value);
 
-    this.api.addAirplane(form)
-      .subscribe(response => {
-      console.log(response);
-        this.isLoadingResults = false;
+    this.api.postAirplane(this.addForm.value)
+      .subscribe(data => {
         this.router.navigate(['/']);
-      }, (err) => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });
+      }
+        , (err) => {
+         
+            console.error("an error occurred here broo");
+            console.log(err.status);
+            console.log(err.headers);
+            console.log(err.error);
+            console.log(err.error.title);
+            console.log(err.error.errors);
+            for (var i in err.error.errors) {
+              if (err.error.errors.hasOwnProperty(i)) {
+                  console.log(err.error.errors[i].map(
+                    function (item) {
+                      return item
+                    }
+                  )
+                  );
+
+              }
+            }
+
+        }
+      );
+
     this.isLoadingResults = false;
   }
 
