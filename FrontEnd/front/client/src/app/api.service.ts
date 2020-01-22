@@ -50,15 +50,7 @@ export class ApiService {
         .set("Content-Type", "application/json")
         .set("Accept", "application/json")
     };
-
-    // var obj =  {
-    //   "code": "string",
-    //   "model": {
-    //     "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
-    //   },
-    //   "numberOfPassengers": 0
-    // }
-
+  
     var obj = {
       code: airPlaneAddModel.code,
       model: airPlaneAddModel.model,
@@ -77,41 +69,15 @@ export class ApiService {
 
   updateAirplane(id: string, airPlane: any): Observable<any> {
     const url = `${apiUrlAirPlane}/${id}`;
-    // return this.http
-    // .put(url, airPlane, httpOptions)
-    // .pipe(
-    //   tap(_ => console.log(`updated Airplane id=${id}`)),
-    //   catchError(this.handleError<any>('updateAirplane'))
-    // );
-
     return this.http
-      .put<any>(`${url}`, airPlane, {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json'
-        })
-      })
-      .pipe(
-        catchError(this.handleError)
-      );
-
+    .put(url, airPlane, httpOptions)
+    .pipe(
+      tap(_ => console.log(`updated Airplane id=${id}`)),
+      catchError(this.handleError<any>('updateAirplane'))
+    );
 
   }
-  putAirPlane(id: string, airPlane: any) {
-    const url = `${apiUrlAirPlane}/${id}`;
-    const obj = {
-      code: airPlane.code,
-      model: airPlane.model,
-      numberOfPassengers: airPlane.numberOfPassengers
-    };
-    return this
-      .http
-      .put(`${url}`, obj)
-      .subscribe(res => console.log(`res ${res}`)
-        , catchError(this.handleError)
-      )
-      ;
-  }
-
+ 
   deleteAirplane(id: string): Observable<AirPlaneModel> {
     const url = `${apiUrlAirPlane}/${id}`;
     return this.http.delete<AirPlaneModel>(url, httpOptions).pipe(

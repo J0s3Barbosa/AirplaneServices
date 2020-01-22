@@ -38,7 +38,7 @@ export class AirplaneEditComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.api
-      .putAirPlane(params['id'], this.airPlaneModelForm);
+      .updateAirplane(params['id'], this.airPlaneModelForm);
   });
 
 

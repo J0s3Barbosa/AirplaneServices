@@ -32,7 +32,7 @@ export class AirplaneDetailComponent implements OnInit {
     this.api.deleteAirplane(id)
       .subscribe(res => {
           this.isLoadingResults = false;
-          this.router.navigate(['/airPlaneModel']);
+          this.router.navigate(['/airplane']);
         }, (err) => {
           console.log(err);
           this.isLoadingResults = false;
