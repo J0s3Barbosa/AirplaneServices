@@ -12,10 +12,11 @@ import { AirPlaneModel } from '../Shared/AirPlaneModel';
   styleUrls: ['./airplane-edit.component.css']
 })
 export class AirplaneEditComponent implements OnInit {
+  dataAirPlaneModel: AirPlaneModel[] = [];
 
   airPlaneModelForm: FormGroup;
   code = '';
-  model = null;
+  modelId = null;
   numberOfPassengers = null;
 
   isLoadingResults = false;
@@ -29,37 +30,59 @@ export class AirplaneEditComponent implements OnInit {
   createForm() {
     this.airPlaneModelForm = this.formBuilder.group({
       code: ['', Validators.required ],
-      model: ['', Validators.required ],
+      modelId: ['', Validators.required ],
       numberOfPassengers: ['', Validators.required ]
       });
     }
 
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.api
-      .updateAirplane(params['id'], this.airPlaneModelForm);
-  });
-
+   
+  this.api.getAirPlaneModels()
+  .subscribe(res => {
+    this.dataAirPlaneModel = res;
+    console.log(this.dataAirPlaneModel);
+    this.isLoadingResults = false;
+  }, err => {
+    console.log(err);
+    this.isLoadingResults = false;
+  })
 
   }
 
+  onFormSubmit(airPlaneModelForm : NgForm) {
+    this.isLoadingResults = true;
+    this.api.updateAirplane(this.route.snapshot.params['id'], airPlaneModelForm)
+      .subscribe(res => {
+          this.isLoadingResults = false;
+          this.airplaneDetails();
+        }, (err) => {
+          console.log(err);
+          this.isLoadingResults = false;
+        }
+      );
+  }
+  
   airplaneDetails() {
     this.router.navigate(['/airplane-details', this.route.snapshot.params['id']]);
   }
+
   getAirplaneDetails(id: string) {
     this.api.getAirplane(id)
       .subscribe(data => {
         this.isLoadingResults = true;
         this.airPlaneModelForm.setValue({
           code: data.code,
-          model: data.model,
+          modelId: data.model.id,
           numberOfPassengers: data.numberOfPassengers,
         });
+        console.log('this.airPlaneModelForm');
         console.log(this.airPlaneModelForm);
         this.isLoadingResults = false;
       });
   }
+
+  
 }
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {

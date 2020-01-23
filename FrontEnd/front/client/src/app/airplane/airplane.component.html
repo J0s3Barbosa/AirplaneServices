@@ -25,13 +25,13 @@
 
             <!-- model Name Column -->
             <ng-container matColumnDef="model">
-                <th mat-header-cell *matHeaderCellDef>model Name</th>
-                <td mat-cell *matCellDef="let row">{{row.model}}</td>
+                <th mat-header-cell *matHeaderCellDef>Model Name</th>
+                <td mat-cell *matCellDef="let row">{{row.model.name}}</td>
             </ng-container>
 
             <!-- numberOfPassengers Column -->
             <ng-container matColumnDef="numberOfPassengers">
-                <th mat-header-cell *matHeaderCellDef>numberOfPassengers</th>
+                <th mat-header-cell *matHeaderCellDef>Number Of Passengers</th>
                 <td mat-cell *matCellDef="let row">{{row.numberOfPassengers}}</td>
             </ng-container>
 

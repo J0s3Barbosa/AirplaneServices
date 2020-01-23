@@ -4,14 +4,14 @@ import { Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap, map } from 'rxjs/operators';
 import { AirPlaneModel } from './Shared/AirPlaneModel';
-import { AirPlaneModelModel } from './Shared/AirPlaneModelModel';
-import { AirPlaneAddModel } from './Shared/AirPlaneAddModel';
 import { ApiResponse } from './Shared/ApiResponse';
+import { AirPlaneAdd } from './Shared/AirPlaneAdd';
+import { AirPlane } from './Shared/AirPlane';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
-const host = 'https://localhost:44344';
+const host = 'https://localhost:5000';
 const endPointAirPlane = '/api/v1/airplane';
 const endPointAirPlaneModel = '/api/v1/AirPlaneModel';
 const apiUrlAirPlane = `${host}${endPointAirPlane}`;
@@ -21,29 +21,29 @@ const apiUrlAirPlaneModel = `${host}${endPointAirPlaneModel}`;
   providedIn: 'root'
 })
 export class ApiService {
-  formData:AirPlaneAddModel;
+  formData:AirPlaneAdd;
 
   constructor(private http: HttpClient) { }
 
-  getAirplanes(): Observable<AirPlaneModel[]> {
-    return this.http.get<AirPlaneModel[]>(apiUrlAirPlane)
+  getAirplanes(): Observable<AirPlane[]> {
+    return this.http.get<AirPlane[]>(apiUrlAirPlane)
       .pipe(
         tap(airPlane => console.log(`fetched Airplanes =${airPlane}`)),
         catchError(this.handleError('getAirplanes', []))
       );
   }
 
-  getAirplane(id: string): Observable<AirPlaneModel> {
+  getAirplane(id: string): Observable<AirPlane> {
     const url = `${apiUrlAirPlane}/${id}`;
-    return this.http.get<AirPlaneModel>(url).pipe(
+    return this.http.get<AirPlane>(url).pipe(
       tap(airPlane =>
-        console.log(`fetched Airplane id=${id} airPlane=${airPlane.code}`)
+        console.log(`fetched Airplane id= ${id} airPlane.model.name= ${airPlane.model.name}`)
       ),
-      catchError(this.handleError<AirPlaneModel>(`getAirplane id=${id}`))
+      catchError(this.handleError<AirPlane>(`getAirplane id= ${id}`))
     );
   }
 
-  addAirplane(airPlaneAddModel: any): Observable<AirPlaneAddModel> {
+  addAirplane(airPlaneAddModel: any): Observable<AirPlaneAdd> {
 
     let options = {
       headers: new HttpHeaders()
@@ -56,16 +56,15 @@ export class ApiService {
       model: airPlaneAddModel.model,
       numberOfPassengers: airPlaneAddModel.numberOfPassengers
     };
-    return this.http.post<AirPlaneAddModel>(apiUrlAirPlane, obj, options).pipe(
-      tap((airPlaneRes: AirPlaneAddModel) => console.log(`added Airplane w/ code=${airPlaneRes.code}`)),
-      catchError(this.handleError<AirPlaneAddModel>('addAirplane'))
+    return this.http.post<AirPlaneAdd>(apiUrlAirPlane, obj, options).pipe(
+      tap((airPlaneRes: AirPlaneAdd) => console.log(`added Airplane w/ code=${airPlaneRes.code}`)),
+      catchError(this.handleError<AirPlaneAdd>('addAirplane'))
     );
   }
 
-  postAirplane(airPlaneAddModel: AirPlaneAddModel): Observable<ApiResponse> {
+  postAirplane(airPlaneAddModel: AirPlaneAdd): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(apiUrlAirPlane, airPlaneAddModel);
   }
-
 
   updateAirplane(id: string, airPlane: any): Observable<any> {
     const url = `${apiUrlAirPlane}/${id}`;
@@ -78,22 +77,21 @@ export class ApiService {
 
   }
  
-  deleteAirplane(id: string): Observable<AirPlaneModel> {
+  deleteAirplane(id: string): Observable<AirPlane> {
     const url = `${apiUrlAirPlane}/${id}`;
-    return this.http.delete<AirPlaneModel>(url, httpOptions).pipe(
+    return this.http.delete<AirPlane>(url, httpOptions).pipe(
       tap(_ => console.log(`deleted Airplane id=${id}`)),
-      catchError(this.handleError<AirPlaneModel>('deleteAirplane'))
+      catchError(this.handleError<AirPlane>('deleteAirplane'))
     );
   }
 
-  getAirPlaneModelModels(): Observable<AirPlaneModelModel[]> {
-    return this.http.get<AirPlaneModelModel[]>(apiUrlAirPlaneModel)
+  getAirPlaneModels(): Observable<AirPlaneModel[]> {
+    return this.http.get<AirPlaneModel[]>(apiUrlAirPlaneModel)
       .pipe(
         tap(airPlaneModelModel => console.log(`fetched Airplanes =${airPlaneModelModel}`)),
         catchError(this.handleError('getAirplanes', []))
       );
   }
-
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

@@ -21,7 +21,8 @@ import {
   MatIconModule,
   MatButtonModule,
   MatCardModule,
-  MatFormFieldModule } from '@angular/material';
+  MatFormFieldModule, 
+  MatSelectModule} from '@angular/material';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import {
     MatIconModule,
     MatButtonModule,
     MatCardModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatSelectModule
     ],
   providers: [],
   bootstrap: [AppComponent]

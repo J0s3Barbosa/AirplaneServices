@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
-import { AirPlaneModel } from '../Shared/AirPlaneModel';
+import { AirPlane } from '../Shared/AirPlane';
 
 @Component({
   selector: 'app-airplane',
@@ -10,7 +10,7 @@ import { AirPlaneModel } from '../Shared/AirPlaneModel';
 export class AirplaneComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'code', 'model', 'numberOfPassengers', 'creationDate'];
-  data: AirPlaneModel[] = [];
+  data: AirPlane[] = [];
   isLoadingResults = true;
 
 

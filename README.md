@@ -24,6 +24,11 @@
 
     executar a api
 
+    https://localhost:5000/swagger/index.html
+    https://localhost:5000/api/v1/AirPlane
+
+
+
 ###### Before Running this Project
  1. Install npm packages using 'npm install' command from Angular 7 folder.
  ng serve

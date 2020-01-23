@@ -1,7 +1,7 @@
 ﻿using AirplaneServices.Application.Extensions;
 using AirplaneServices.Application.Interfaces;
+using AirplaneServices.Domain.DTO;
 using AirplaneServices.Domain.Entities;
-using AirplaneServices.WebAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -24,7 +24,7 @@ namespace AirplaneServices.WebAPI.Controllers
             _IAirPlaneModelLogic = iAppAirPlaneModelLogic;
         }
 
-        //https://localhost:5001/v1/AirPlaneModelController?code=5
+        //https://localhost:5000/api/v1/AirPlaneModel
         /// <summary>
         /// Get AirPlaneModel
         /// </summary>
@@ -32,9 +32,9 @@ namespace AirplaneServices.WebAPI.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpGet]
         [AllowAnonymous]
-        [ProducesResponseType(typeof(IList<Models.AirPlaneModel>), 200)]
+        [ProducesResponseType(typeof(IList<AirPlaneModelDTO>), 200)]
         [ProducesResponseType(500)]
-        public async Task<ActionResult<IList<Models.AirPlaneModel>>> GetAirPlaneModel()
+        public async Task<ActionResult<IList<AirPlaneModelDTO>>> GetAirPlaneModel()
         {
             var response = this._IAirPlaneModelLogic.List();
 
@@ -53,11 +53,11 @@ namespace AirplaneServices.WebAPI.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpGet("{id}")]
         [AllowAnonymous]
-        [ProducesResponseType(typeof(AirPlaneModelModel), 200)]
+        [ProducesResponseType(typeof(AirPlaneModelDTO), 200)]
         [ProducesResponseType(typeof(ErrorModel), 400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        public async Task<ActionResult<AirPlaneModelModel>> GetAirPlaneModels(string id)
+        public async Task<ActionResult<AirPlaneModelDTO>> GetAirPlaneModels(string id)
         {
             Guid identifier = Guid.Empty;
             if (!Guid.TryParse(id, out identifier))

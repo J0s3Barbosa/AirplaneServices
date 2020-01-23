@@ -3,10 +3,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators, FormArray, AbstractControl } from '@angular/forms';
-import { AirPlaneAddModel } from '../Shared/AirPlaneAddModel';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { AirPlaneModelModel } from '../Shared/AirPlaneModelModel';
-import { HttpErrorResponse } from '@angular/common/http';
+import { AirPlaneModel } from '../Shared/AirPlaneModel';
 
 @Component({
   selector: 'app-airplane-add',
@@ -14,7 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./airplane-add.component.css']
 })
 export class AirplaneAddComponent implements OnInit {
-  dataAirPlaneModelModel: AirPlaneModelModel[] = [];
+  dataAirPlaneModelModel: AirPlaneModel[] = [];
 
   addForm: FormGroup;
   isLoadingResults = true;
@@ -25,7 +23,7 @@ export class AirplaneAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.api.getAirPlaneModelModels()
+    this.api.getAirPlaneModels()
       .subscribe(res => {
         this.dataAirPlaneModelModel = res;
         console.log(this.dataAirPlaneModelModel);

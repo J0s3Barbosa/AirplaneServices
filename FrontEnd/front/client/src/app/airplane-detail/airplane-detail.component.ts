@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../api.service';
+import { AirPlane } from '../Shared/AirPlane';
 import { AirPlaneModel } from '../Shared/AirPlaneModel';
 
 @Component({
@@ -10,10 +11,10 @@ import { AirPlaneModel } from '../Shared/AirPlaneModel';
 })
 export class AirplaneDetailComponent implements OnInit {
  
-  airPlaneModel: AirPlaneModel = {
+  airPlaneModel: AirPlane = {
     id: '',
     code: '',
-    model: null,
+    model: new AirPlaneModel,
     numberOfPassengers: null,
     creationDate: null ,
   };

@@ -15,9 +15,20 @@
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="model" formControlName="model"
-                 [errorStateMatcher]="matcher">
-        </mat-form-field>
+                 <mat-label>model</mat-label>
+                 <div formGroupName="model">
+                   <mat-select class="form-control"  placeholder="id" formControlName="id"
+                >
+                     <mat-option *ngFor="let event of dataAirPlaneModel; let i = index" [value]="event.id">
+                       {{event.name}}
+                     </mat-option>
+                   </mat-select>
+                 </div>
+
+      </mat-form-field>
+
+        
+
 
         <mat-form-field class="example-full-width">
           <input matInput placeholder="numberOfPassengers" formControlName="numberOfPassengers"

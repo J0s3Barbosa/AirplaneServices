@@ -11,7 +11,7 @@
     <mat-card class="example-card">
       <mat-card-header>
         <mat-card-title><h2>airplane ID: {{airPlaneModel.id}}</h2></mat-card-title>
-        <mat-card-subtitle>model Name: {{airPlaneModel.code}}</mat-card-subtitle>
+        <mat-card-subtitle>model Name: {{airPlaneModel.model.name}}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
         <dl>
@@ -20,7 +20,7 @@
           <dt>code:</dt>
           <dd>{{airPlaneModel.code}}</dd>
           <dt>model:</dt>
-          <dd>{{airPlaneModel.model}}</dd>
+          <dd>{{airPlaneModel.model.name}}</dd>
           <dt>numberOfPassengers:</dt>
           <dd>{{airPlaneModel.numberOfPassengers}}</dd>
           <dt>creationDate:</dt>

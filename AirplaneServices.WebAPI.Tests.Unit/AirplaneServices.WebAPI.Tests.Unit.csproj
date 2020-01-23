@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AirplaneServices.Application\AirplaneServices.Application.csproj" />
     <ProjectReference Include="..\AirplaneServices.WebAPI\AirplaneServices.WebAPI.csproj" />
   </ItemGroup>
 

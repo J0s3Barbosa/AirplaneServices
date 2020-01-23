@@ -42,7 +42,7 @@ namespace AirplaneServices.WebAPI.Tests.Unit
                 NumberOfPassengers = randomNumber.Next(1, 300)
             };
 
-            var airPlanes = _AirPlaneLogic.List(airPlane.Code, airPlane.Model.Name, (short)airPlane.NumberOfPassengers, airPlane.CreationDate);
+            var airPlanes = _AirPlaneLogic.List();
 
             // Assert
             var result = airPlanes.Should().BeOfType<List<AirPlane>>().Subject;

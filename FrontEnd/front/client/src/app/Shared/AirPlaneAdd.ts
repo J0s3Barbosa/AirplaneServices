@@ -1,6 +1,5 @@
 
-export class AirPlaneAddModel
-{    
+export class AirPlaneAdd{    
     code: string;
     model: { id: string};
     numberOfPassengers: number;

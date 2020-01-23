@@ -1,7 +1,7 @@
 ﻿using AirplaneServices.Application.Extensions;
 using AirplaneServices.Application.Interfaces;
+using AirplaneServices.Domain.DTO;
 using AirplaneServices.Domain.Entities;
-using AirplaneServices.WebAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -31,9 +31,9 @@ namespace AirplaneServices.WebAPI.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpGet]
         [AllowAnonymous]
-        [ProducesResponseType(typeof(IList<Models.AirPlaneModel>), 200)]
+        [ProducesResponseType(typeof(IList<AirPlaneModel>), 200)]
         [ProducesResponseType(500)]
-        public async Task<ActionResult<IList<Models.AirPlaneModel>>> GetAirPlane(string code, string model, short? numberOfPassengers, DateTime? creationDate)
+        public async Task<ActionResult<IList<AirPlaneModel>>> GetAirPlane(string code, string model, short? numberOfPassengers, DateTime? creationDate)
         {
             List<AirPlane> airPlanes = this._IAppAirPlaneLogic.List(code, model, numberOfPassengers, creationDate);
 
@@ -52,11 +52,11 @@ namespace AirplaneServices.WebAPI.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpGet("{id}")]
         [AllowAnonymous]
-        [ProducesResponseType(typeof(Models.AirPlaneModel), 200)]
+        [ProducesResponseType(typeof(AirPlaneModel), 200)]
         [ProducesResponseType(typeof(ErrorModel), 400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        public async Task<ActionResult<Models.AirPlaneModel>> GetAirPlanes(string id)
+        public async Task<ActionResult<AirPlaneModel>> GetAirPlanes(string id)
         {
             Guid identifier = Guid.Empty;
             if (!Guid.TryParse(id, out identifier))
@@ -77,11 +77,11 @@ namespace AirplaneServices.WebAPI.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpPost]
         [AllowAnonymous]
-        [ProducesResponseType(typeof(Models.AirPlaneModel), 201)]
+        [ProducesResponseType(typeof(AirPlaneModel), 201)]
         [ProducesResponseType(typeof(ErrorModel), 400)]
         [ProducesResponseType(typeof(string), 422)]
         [ProducesResponseType(500)]
-        public async Task<ActionResult<Models.AirPlaneModel>> CreateAirPlane([FromBody] AirPlaneAddModel airPlane)
+        public async Task<ActionResult<AirPlaneModel>> CreateAirPlane([FromBody] AirPlaneAddModel airPlane)
         {
             if (airPlane == null)
                 return await Task.FromResult<ActionResult>(this.BadRequest(new ErrorModel(1, "AirPlane", "The AirPlane can not be null!").ToList()));
@@ -108,12 +108,12 @@ namespace AirplaneServices.WebAPI.Controllers
         /// <response code="422">Unprocessable Entity</response>
         /// <response code="500">Internal Server Error</response>
         [HttpPut("{id}")]
-        [ProducesResponseType(typeof(Models.AirPlaneModel), 200)]
+        [ProducesResponseType(typeof(AirPlaneModel), 200)]
         [ProducesResponseType(typeof(ErrorModel), 400)]
         [ProducesResponseType(typeof(string), 404)]
         [ProducesResponseType(typeof(string), 422)]
         [ProducesResponseType(500)]
-        public async Task<ActionResult<Models.AirPlaneModel>> UpdateAirPlane(string id, [FromBody] AirPlaneAlterModel airPlane)
+        public async Task<ActionResult<AirPlaneModel>> UpdateAirPlane(string id, [FromBody] AirPlaneAlterModel airPlane)
         {
             Guid identifier = Guid.Empty;
             if (!Guid.TryParse(id, out identifier))
@@ -150,7 +150,7 @@ namespace AirplaneServices.WebAPI.Controllers
         [ProducesResponseType(500)]
         public async Task<ActionResult<string>> RemoveAirPlane(string id)
         {
-            List<Models.AirPlaneModel> AirPlaneRepository = new List<Models.AirPlaneModel>();//n tava
+            List<AirPlaneModel> AirPlaneRepository = new List<AirPlaneModel>();//n tava
 
             Guid identifier = Guid.Empty;
             if (!Guid.TryParse(id, out identifier))
