@@ -14,75 +14,75 @@ import { AirPlaneModel } from '../Shared/AirPlaneModel';
 export class AirplaneEditComponent implements OnInit {
   dataAirPlaneModel: AirPlaneModel[] = [];
 
-  airPlaneModelForm: FormGroup;
-  code = '';
-  modelId = null;
-  numberOfPassengers = null;
+  airPlaneForm: FormGroup;
 
   isLoadingResults = false;
   matcher = new MyErrorStateMatcher();
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private api: ApiService, private formBuilder: FormBuilder) { 
-    this.createForm();
-    this.getAirplaneDetails(this.route.snapshot.params['id']);
-  }
-  createForm() {
-    this.airPlaneModelForm = this.formBuilder.group({
-      code: ['', Validators.required ],
-      modelId: ['', Validators.required ],
-      numberOfPassengers: ['', Validators.required ]
-      });
-    }
+  constructor(private router: Router, private route: ActivatedRoute, private api: ApiService, private formBuilder: FormBuilder) {
 
+  }
 
   ngOnInit() {
-   
-  this.api.getAirPlaneModels()
-  .subscribe(res => {
-    this.dataAirPlaneModel = res;
-    console.log(this.dataAirPlaneModel);
-    this.isLoadingResults = false;
-  }, err => {
-    console.log(err);
-    this.isLoadingResults = false;
-  })
+    this.getAirplaneDetails(this.route.snapshot.params['id']);
+    this.createForm();
+    this.api.getAirPlaneModels()
+      .subscribe(res => {
+        this.dataAirPlaneModel = res;
+        console.log(this.dataAirPlaneModel);
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      })
 
   }
 
-  onFormSubmit(airPlaneModelForm : NgForm) {
+  createForm() {
+    this.airPlaneForm = this.formBuilder.group({
+      code: ['', Validators.required],
+      model: this.formBuilder.group({
+        id: '',
+        name: ''
+      }),
+      numberOfPassengers: ['', Validators.required]
+    });
+  }
+
+  onFormSubmit(airPlaneForm: NgForm) {
     this.isLoadingResults = true;
-    this.api.updateAirplane(this.route.snapshot.params['id'], airPlaneModelForm)
+
+    this.api.updateAirplane(this.route.snapshot.params['id'], airPlaneForm)
       .subscribe(res => {
-          this.isLoadingResults = false;
-          this.airplaneDetails();
-        }, (err) => {
-          console.log(err);
-          this.isLoadingResults = false;
-        }
+        this.isLoadingResults = false;
+        this.airplaneDetails(res.id);
+      }, (err) => {
+        console.log(err);
+        this.isLoadingResults = false;
+      }
       );
   }
-  
-  airplaneDetails() {
-    this.router.navigate(['/airplane-details', this.route.snapshot.params['id']]);
+
+  airplaneDetails(id) {
+    this.router.navigate(['/airplane-details', id]);
   }
 
   getAirplaneDetails(id: string) {
     this.api.getAirplane(id)
       .subscribe(data => {
         this.isLoadingResults = true;
-        this.airPlaneModelForm.setValue({
+
+        this.airPlaneForm.setValue({
           code: data.code,
-          modelId: data.model.id,
+          model: data.model,
           numberOfPassengers: data.numberOfPassengers,
         });
-        console.log('this.airPlaneModelForm');
-        console.log(this.airPlaneModelForm);
         this.isLoadingResults = false;
       });
   }
 
-  
+
 }
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {

@@ -18,10 +18,13 @@ namespace AirplaneServices.WebAPI.Controllers
     public class AirPlaneController : ControllerBase
     {
         private readonly IAirPlaneLogic _IAppAirPlaneLogic;
+        private readonly IAirPlaneModelLogic _IAirPlaneModelLogic;
 
-        public AirPlaneController(IAirPlaneLogic iAppAirPlaneLogic)
+        public AirPlaneController(IAirPlaneLogic iAppAirPlaneLogic,
+            IAirPlaneModelLogic iAppAirPlaneModelLogic)
         {
             this._IAppAirPlaneLogic = iAppAirPlaneLogic;
+            _IAirPlaneModelLogic = iAppAirPlaneModelLogic;
         }
 
         /// <summary>
@@ -81,7 +84,7 @@ namespace AirplaneServices.WebAPI.Controllers
         [ProducesResponseType(typeof(ErrorModel), 400)]
         [ProducesResponseType(typeof(string), 422)]
         [ProducesResponseType(500)]
-        public async Task<ActionResult<AirPlaneModel>> CreateAirPlane([FromBody] AirPlaneAddModel airPlane)
+        public async Task<ActionResult<AirPlaneModel>> CreateAirPlane([FromBody] AirPlaneAddDTO airPlane)
         {
             if (airPlane == null)
                 return await Task.FromResult<ActionResult>(this.BadRequest(new ErrorModel(1, "AirPlane", "The AirPlane can not be null!").ToList()));
@@ -108,12 +111,12 @@ namespace AirplaneServices.WebAPI.Controllers
         /// <response code="422">Unprocessable Entity</response>
         /// <response code="500">Internal Server Error</response>
         [HttpPut("{id}")]
-        [ProducesResponseType(typeof(AirPlaneModel), 200)]
+        [ProducesResponseType(typeof(AirPlane), 200)]
         [ProducesResponseType(typeof(ErrorModel), 400)]
         [ProducesResponseType(typeof(string), 404)]
         [ProducesResponseType(typeof(string), 422)]
         [ProducesResponseType(500)]
-        public async Task<ActionResult<AirPlaneModel>> UpdateAirPlane(string id, [FromBody] AirPlaneAlterModel airPlane)
+        public async Task<ActionResult<AirPlane>> UpdateAirPlane(string id, [FromBody] AirPlaneAlterDTO airPlane)
         {
             Guid identifier = Guid.Empty;
             if (!Guid.TryParse(id, out identifier))
@@ -122,11 +125,13 @@ namespace AirplaneServices.WebAPI.Controllers
             if (airPlane == null)
                 return await Task.FromResult<ActionResult>(this.BadRequest(new ErrorModel(1, "AirPlane", "AirPlane invalid!").ToList()));
 
+            //var airPlaneModel = _IAirPlaneModelLogic.GetEntity(airPlane.Model.Id);
             var entity = new AirPlane()
             {
                 Code = airPlane.Code,
                 NumberOfPassengers = airPlane.NumberOfPassengers,
-                ModelId = airPlane.Model.Id
+                ModelId = airPlane.Model.Id,
+                //Model = airPlaneModel
             };
 
             var result = this._IAppAirPlaneLogic.Update(identifier, entity);
