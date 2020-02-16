@@ -1,37 +1,42 @@
-﻿using AirplaneServices.Infra.Context;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Threading.Tasks;
 
 namespace AirplaneServices.WebAPI.Extensions
 {
-    internal static class IWebHostExtensions
+    public static class IWebHostExtensions
     {
-        internal static IHost MigrateDbContext<TContext>(this IHost webHost, Action<TContext> seeder) where TContext : DbContext
+        public static IWebHost MigrateDbContext<TContext>(this IWebHost webHost, Action<TContext, IServiceProvider> seeder)
+            where TContext : DbContext
         {
-            Task.Run(delegate
+            using (var scope = webHost.Services.CreateScope())
             {
-                using (var scope = webHost.Services.CreateScope())
+                var services = scope.ServiceProvider;
+                var logger = services.GetRequiredService<ILogger<TContext>>();
+                var context = services.GetService<TContext>();
+
+                try
                 {
-                    var context = new ContextBase();
+                    logger.LogInformation($"Migrating database associated with context {typeof(TContext).Name}");
 
-                    try
-                    {
-                        context.Database.Migrate();
-                        context.Dispose();
-                    }
-                    catch (Exception ex)
-                    {
-                        var logger = scope.ServiceProvider.GetRequiredService<ILogger<TContext>>();
-                        logger.LogError(ex, "An error occurred while migrating the database.");
-                    }
+                    context.Database
+                        .Migrate();
+
+                    seeder(context, services);
+
+                    logger.LogInformation($"Migrated database associated with context {typeof(TContext).Name}");
                 }
-            });
-
+                catch (Exception ex)
+                {
+                    logger.LogError(ex, $"An error occurred while migrating the database used on context {typeof(TContext).Name}");
+                }
+            }
             return webHost;
         }
     }
+
+
+
 }

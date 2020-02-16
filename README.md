@@ -20,6 +20,8 @@
 
     ## para executar o projeto backend
 
+        - criar uma database com nome "AirServicesDB"
+
         - crie uma variável de ambiente no windows com a connectionstring do seu banco conforme abaixo
             Variable Name = LocalConnection
             Variable value = Data Source=DESKTOP-OUM5KHF\SQLEXPRESS;Initial Catalog=AirServicesDB;Integrated Security=True
