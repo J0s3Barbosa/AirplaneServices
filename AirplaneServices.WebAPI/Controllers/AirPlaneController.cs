@@ -125,13 +125,11 @@ namespace AirplaneServices.WebAPI.Controllers
             if (airPlane == null)
                 return await Task.FromResult<ActionResult>(this.BadRequest(new ErrorModel(1, "AirPlane", "AirPlane invalid!").ToList()));
 
-            //var airPlaneModel = _IAirPlaneModelLogic.GetEntity(airPlane.Model.Id);
             var entity = new AirPlane()
             {
                 Code = airPlane.Code,
                 NumberOfPassengers = airPlane.NumberOfPassengers,
                 ModelId = airPlane.Model.Id,
-                //Model = airPlaneModel
             };
 
             var result = this._IAppAirPlaneLogic.Update(identifier, entity);

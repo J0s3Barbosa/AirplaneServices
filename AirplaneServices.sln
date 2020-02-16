@@ -22,8 +22,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirplaneServices.Domain", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirplaneServices.Infra", "..\J0s3Barbosa\AirPlaneComponents\AirplaneServices.Infra\AirplaneServices.Infra.csproj", "{7C8C1F00-3CE4-4FBE-87ED-FECDEEC3B631}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirplaneServices.ApplicationTests", "..\J0s3Barbosa\AirPlaneComponents\AirplaneServices.ApplicationTests\AirplaneServices.ApplicationTests.csproj", "{B5ACF608-E1C2-4DC3-B098-6B6672D6904B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,10 +48,6 @@ Global
 		{7C8C1F00-3CE4-4FBE-87ED-FECDEEC3B631}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C8C1F00-3CE4-4FBE-87ED-FECDEEC3B631}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C8C1F00-3CE4-4FBE-87ED-FECDEEC3B631}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B5ACF608-E1C2-4DC3-B098-6B6672D6904B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B5ACF608-E1C2-4DC3-B098-6B6672D6904B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B5ACF608-E1C2-4DC3-B098-6B6672D6904B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B5ACF608-E1C2-4DC3-B098-6B6672D6904B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

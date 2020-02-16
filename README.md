@@ -18,25 +18,24 @@
 
 # Manual de Instalação da aplicação
 
-    ter certeza que localdb esta funcionando na maquina
+    ## para executar o projeto backend
 
-    executar o  comando "Update-Database" no package manager console
+        - crie uma variável de ambiente no windows com a connectionstring do seu banco conforme abaixo
+            Variable Name = LocalConnection
+            Variable value = Data Source=DESKTOP-OUM5KHF\SQLEXPRESS;Initial Catalog=AirServicesDB;Integrated Security=True
 
-    executar a api
+        - executar a api 
 
-    https://localhost:5000/swagger/index.html
-    https://localhost:5000/api/v1/AirPlane
+        - Api utiliza Swagger para  documentação e utilização 
+                https://localhost:5000/swagger
 
+    ## para executar o projeto frontend
 
-
-###### Before Running this Project
- 1. Install npm packages using 'npm install' command from Angular 7 folder.
- ng serve
-
-
-# executar FRONT-END
-    Para executar o projeto em angular 7, entre no diretório e digite [ng serve --open] no console;
-
+        - entre no diretório do projeto
+        - execute 'npm install' para instalar as dependências
+        - execute 'ng serve --open' no console da IDE para abrir o projeto
+ 
+ 
 # AirplaneServices Tecnologias utilizadas:
 
     ⦁ FRONT-END – Angular 7
