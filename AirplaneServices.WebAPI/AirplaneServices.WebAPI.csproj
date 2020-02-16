@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\J0s3Barbosa\AirPlaneComponents\AirplaneServices.Application\AirplaneServices.Application.csproj" />
+    <ProjectReference Include="..\..\AirPlaneComponents\AirplaneServices.Application\AirplaneServices.Application.csproj" />
   </ItemGroup>
 
 

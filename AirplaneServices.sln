@@ -16,11 +16,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{179949E7-52D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirplaneServices.WebAPI.Tests.Unit", "AirplaneServices.WebAPI.Tests.Unit\AirplaneServices.WebAPI.Tests.Unit.csproj", "{B830819A-73FB-4026-9368-0008BB716C9E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirplaneServices.Application", "..\J0s3Barbosa\AirPlaneComponents\AirplaneServices.Application\AirplaneServices.Application.csproj", "{8AB127FE-B5F1-425C-B4EA-B3296DDEABB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirplaneServices.Application", "..\AirPlaneComponents\AirplaneServices.Application\AirplaneServices.Application.csproj", "{8AB127FE-B5F1-425C-B4EA-B3296DDEABB9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirplaneServices.Domain", "..\J0s3Barbosa\AirPlaneComponents\AirplaneServices.Domain\AirplaneServices.Domain.csproj", "{4E39F91B-CEA1-4DDC-9581-02C5B4B426F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirplaneServices.Domain", "..\AirPlaneComponents\AirplaneServices.Domain\AirplaneServices.Domain.csproj", "{4E39F91B-CEA1-4DDC-9581-02C5B4B426F4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirplaneServices.Infra", "..\J0s3Barbosa\AirPlaneComponents\AirplaneServices.Infra\AirplaneServices.Infra.csproj", "{7C8C1F00-3CE4-4FBE-87ED-FECDEEC3B631}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirplaneServices.Infra", "..\AirPlaneComponents\AirplaneServices.Infra\AirplaneServices.Infra.csproj", "{7C8C1F00-3CE4-4FBE-87ED-FECDEEC3B631}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
