@@ -11,7 +11,7 @@ import { AirPlane } from './Shared/AirPlane';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
-const host = 'https://localhost:5000';
+const host = 'http://localhost:5000';
 const endPointAirPlane = '/api/v1/airplane';
 const endPointAirPlaneModel = '/api/v1/AirPlaneModel';
 const apiUrlAirPlane = `${host}${endPointAirPlane}`;

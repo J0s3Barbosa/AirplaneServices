@@ -21,6 +21,8 @@
     ## para executar o projeto backend
 
         - criar uma database com nome "AirServicesDB"
+        - execute migration para criação das tabelas no banco
+            -na aba "Package manager console", selecione o projeto "Infra" e entao digite o comando "update-database" para criação das tabelas.
 
         - crie uma variável de ambiente no windows com a connectionstring do seu banco conforme abaixo
             Variable Name = LocalConnection
@@ -29,7 +31,8 @@
         - executar a api 
 
         - Api utiliza Swagger para  documentação e utilização 
-                https://localhost:5000/swagger
+                http://localhost:5000/swagger
+                http://localhost:5000/api/v1/airplane
 
     ## para executar o projeto frontend
 
