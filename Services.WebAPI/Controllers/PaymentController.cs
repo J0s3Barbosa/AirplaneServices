@@ -92,7 +92,10 @@ namespace Services.WebAPI.Controllers
                 Description = payment.Description,
                 DueDate = string.Format(dateFormat, payment.DueDate),
                 BarCode = payment.BarCode,
-                PaidDate = string.Format(dateFormat, payment.PaidDate)
+                PaidDate = string.Format(dateFormat, payment.PaidDate),
+                Link = payment.Link,
+                Notes = payment.Notes
+
             };
 
             var result = this._IPaymentLogic.AddEntity(entity);
@@ -130,7 +133,10 @@ namespace Services.WebAPI.Controllers
                 Description = payment.Description,
                 DueDate = string.Format(dateFormat, payment.DueDate),
                 BarCode = payment.BarCode,
-                PaidDate = string.Format(dateFormat, payment.PaidDate)
+                PaidDate = string.Format(dateFormat, payment.PaidDate),
+                Link = payment.Link,
+                Notes = payment.Notes
+
             };
 
             var result = this._IPaymentLogic.Update(identifier, entity);
