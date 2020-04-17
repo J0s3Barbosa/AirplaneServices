@@ -1,6 +1,6 @@
-﻿using Services.Application.Extensions;
-using Services.Application.Logic;
-using Services.Domain.Entities;
+﻿using AirplaneServices.Application.Extensions;
+using AirplaneServices.Application.Logic;
+using AirplaneServices.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;

@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Services.Application.Extensions;
-using Services.Application.Interfaces;
-using Services.Domain.DTO;
-using Services.Domain.Entities;
+using AirplaneServices.Application.Extensions;
+using AirplaneServices.Application.Interfaces;
+using AirplaneServices.Domain.DTO;
+using AirplaneServices.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
