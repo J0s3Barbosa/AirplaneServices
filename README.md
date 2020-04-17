@@ -26,7 +26,7 @@
 
         - crie uma variável de ambiente no windows com a connectionstring do seu banco conforme abaixo
             Variable Name = LocalConnection
-            Variable value = Data Source=DESKTOP-OUM5KHF\SQLEXPRESS;Initial Catalog=AirServicesDB;Integrated Security=True
+            Variable value = Data Source=YOURPC\SQLEXPRESS;Initial Catalog=AirServicesDB;Integrated Security=True
 
         - executar a api 
 
